@@ -4,6 +4,9 @@
 
 https://github.com/WH-Creations/Maui_Sample/assets/97212578/05a4d15a-b228-419d-930c-317ea4417564
 
+## Instructions
+1. Run the Maui_Api project
+2. Run the Maui_App targetting an Android simulator in Debug Mode]
 
 ## Architecture
 - MVVM

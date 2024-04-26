@@ -1,14 +1,8 @@
 ﻿using Maui_App.Models;
-using Maui_App.Services.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Maui_App.Services.Common
 {
-    internal class NavigationService : INavigationService
+    public class NavigationService : INavigationService
     {
         // Centralized route definitions
         private const string InspectionDetailRoute = "inspection/detail";

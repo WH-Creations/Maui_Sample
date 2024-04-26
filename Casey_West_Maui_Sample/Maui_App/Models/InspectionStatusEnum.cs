@@ -1,6 +1,6 @@
 ﻿namespace Maui_App.Models
 {
-    internal enum InspectionStatusEnum
+    public enum InspectionStatusEnum
     {
         InProgress = 0,
         Complete = 1,

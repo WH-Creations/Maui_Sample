@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace Maui_App.Repositories.Inspections
 {
-    internal class InspectionRepository : IInspectionRepository
+    public class InspectionRepository : IInspectionRepository
     {
         private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new(JsonSerializerDefaults.Web);
 
         // Constructor injecting the IHttpClientFactory dependency.
         public InspectionRepository(IHttpClientFactory httpClientFactory)
@@ -27,8 +28,7 @@ namespace Maui_App.Repositories.Inspections
             {
                 // Send a GET request to retrieve the inspection by ID.
                 InspectionModel? inspection = await _httpClient.GetFromJsonAsync<InspectionModel>(
-                    $"inspections/{id}",
-                    new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                    $"inspections/{id}", _jsonSerializerOptions);
 
                 return inspection;
             }
@@ -56,8 +56,7 @@ namespace Maui_App.Repositories.Inspections
             {
                 // Send a GET request to retrieve all inspections.
                 List<InspectionModel>? inspections = await _httpClient.GetFromJsonAsync<List<InspectionModel>>(
-                    $"inspections",
-                    new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                    $"inspections", _jsonSerializerOptions);
 
                 return inspections ?? [];
             }

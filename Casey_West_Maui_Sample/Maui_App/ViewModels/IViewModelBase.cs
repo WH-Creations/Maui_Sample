@@ -2,9 +2,8 @@
 
 namespace Maui_App.ViewModels
 {
-    internal interface IBaseViewModel
+    public interface IViewModelBase
     {
-        // Command to initialize the ViewModel asynchronously.
         IAsyncRelayCommand InitializeAsyncCommand { get; }
     }
 }

@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<views:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Maui_App.Views.InspectionListPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:views="clr-namespace:Maui_App.Views"
+             xmlns:converters="clr-namespace:Maui_App.Converters"
              Title="Safety Inspections">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentPage>
+
+    <ContentPage.Resources>
+        <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=", "/>
+        <converters:InspectionStatusConverter x:Key="InspectionStatusConverter" />
+
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <Button 
+                        Margin="5"
+                        Command="{Binding NavigateToAddInspectionCommand}"
+                        HorizontalOptions="Fill"
+                        Text="Add event" />
+                    <CollectionView 
+                        ItemsSource="{Binding Inspections}"
+                        SelectedItem="{Binding SelectedInspection, Mode=TwoWay}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding NavigateToSelectedDetailCommand}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" ColumnDefinitions="Auto,Auto">
+                                    <Frame WidthRequest="120" HeightRequest="80" CornerRadius="6" Padding="0" HasShadow="False">
+                                        <Image 
+                                            Aspect="AspectFill"
+                                            Source="{Binding ImageUrl, TargetNullValue=fallback.jpg}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="120"
+                                            HeightRequest="80"/>
+                                    </Frame>
+                                    <VerticalStackLayout 
+                                        Grid.Column="1"
+                                        Padding="10"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Label 
+                                            Style="{StaticResource ValueLabelStyle}"
+                                            Margin="0"
+                                            Text="{Binding Name}"
+                                            FontAttributes="Bold"/>
+                                        <Label Text="{Binding Date, StringFormat='{0:d}'}" />
+                                        <Label Text="{Binding Location.Name}" />
+                                        <Label 
+                                            FontAttributes="Italic"
+                                            Text="{Binding InspectionStatus, Converter={StaticResource InspectionStatusConverter}}"
+                                            TextColor="{StaticResource Primary}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+
+
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</views:BaseContentPage>

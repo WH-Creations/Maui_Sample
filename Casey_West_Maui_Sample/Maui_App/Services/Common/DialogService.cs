@@ -1,6 +1,6 @@
 ﻿namespace Maui_App.Services.Common
 {
-    internal class DialogService : IDialogService
+    public class DialogService : IDialogService
     {
         public async Task<bool> Ask(string title, string message, string trueButtonText = "Yes", string falseButtonText = "No")
         {

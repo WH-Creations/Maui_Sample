@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Maui_App.ViewModels.Inspection
 {
-    internal class InspectionDetailViewModel
+    public class InspectionDetailViewModel
     {
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls;
 
 namespace Maui_App.Views
 {
-    internal class BaseContentPage : ContentPage
+    public class BaseContentPage : ContentPage
     {
         private bool _isInitialized = false;
 
@@ -13,7 +13,7 @@ namespace Maui_App.Views
             base.OnAppearing();
 
             // Check if context conforms to base VM interface & hasn't been initialized
-            if (_isInitialized || BindingContext is not IBaseViewModel viewModel)
+            if (_isInitialized || BindingContext is not IViewModelBase viewModel)
             {
                 return;
             }

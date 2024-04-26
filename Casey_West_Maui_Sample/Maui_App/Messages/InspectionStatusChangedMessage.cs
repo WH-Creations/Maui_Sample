@@ -2,7 +2,7 @@
 
 namespace Maui_App.Messages
 {
-    internal class InspectionStatusChangedMessage
+    public class InspectionStatusChangedMessage
     {
         public Guid InspectionId { get; }
         public InspectionStatusEnum Status { get; }

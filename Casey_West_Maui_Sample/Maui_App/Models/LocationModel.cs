@@ -2,7 +2,7 @@
 
 namespace Maui_App.Models
 {
-    internal class LocationModel
+    public class LocationModel
     {
         public Guid Id { get; set; }
 

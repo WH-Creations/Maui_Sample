@@ -57,7 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="ViewModels\BaseViewModel.cs" />
+	  <AndroidResource Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,10 +70,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="ViewModels\BaseViewModel.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="Views\InspectionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -83,15 +79,6 @@
 	  <MauiXaml Update="Views\InspectionListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Messages\" />
-	  <Folder Include="Repositories\Inspections\" />
-	  <Folder Include="Repositories\Locations\" />
-	  <Folder Include="Services\Inspections\" />
-	  <Folder Include="Services\Common\" />
-	  <Folder Include="Services\Locations\" />
 	</ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 
 namespace Maui_App.Services.Common
 {
-    internal interface INavigationService
+    public interface INavigationService
     {
         Task GoToInspectionDetail(Guid selectedInspectionId);
         Task GoToAddInspection();

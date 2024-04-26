@@ -1,6 +1,6 @@
 ﻿namespace Maui_App.Models
 {
-    internal enum LocationTypeEnum
+    public enum LocationTypeEnum
     {
         AED = 0,
         FireExtinguisher = 1,

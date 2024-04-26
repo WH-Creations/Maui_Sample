@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Maui_App.Repositories.Inspections
 {
-    internal interface IInspectionRepository
+    public interface IInspectionRepository
     {
         Task<List<InspectionModel>> GetInspections();
         Task<InspectionModel?> GetInspection(Guid id);

@@ -2,7 +2,7 @@
 
 namespace Maui_App.Models
 {
-    internal class InspectionModel
+    public class InspectionModel
     {
         public Guid Id { get; set; }
         public string? ImageUrl { get; set; }

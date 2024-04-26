@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Maui_App.Converters
 {
-    internal class InspectionStatusConverter : IValueConverter
+    public class InspectionStatusConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

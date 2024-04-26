@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Maui_App.Messages
+﻿namespace Maui_App.Messages
 {
-    internal class InspectionDeletedMessage
+    public class InspectionDeletedMessage
     {
         public Guid InspectionId { get; }
 

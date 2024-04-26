@@ -22,7 +22,7 @@ public class Inspection
     public string? Description { get; set; }
 
     [Required]
-    public InspectionStatus Status { get; set; } // Ensure that this enum is defined elsewhere in your project.
+    public InspectionStatus Status { get; set; }
 
     [Required]
     public Location Location { get; set; } = new Location();

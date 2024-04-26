@@ -1,19 +1,14 @@
-﻿using Android.Util;
-using Maui_App.Models;
-using System;
-using System.Collections.Generic;
+﻿using Maui_App.Models;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Maui_App.Repositories.Locations
 {
-    internal class LocationRepository : ILocationRepository
+    public class LocationRepository : ILocationRepository
     {
         private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new(JsonSerializerDefaults.Web);
 
         // Constructor that accepts an IHttpClientFactory and initializes the _httpClient.
         public LocationRepository(IHttpClientFactory httpClientFactory)
@@ -28,8 +23,7 @@ namespace Maui_App.Repositories.Locations
             {
                 // Attempts to retrieve locations from the API using the GET method. Deserializes JSON response to a list of LocationModel.
                 List<LocationModel>? locations = await _httpClient.GetFromJsonAsync<List<LocationModel>>(
-                    "locations",
-                    new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                    "locations", _jsonSerializerOptions);
 
                 // Return the list of locations or a new empty list if the result is null.
                 return locations ?? [];

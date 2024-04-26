@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Maui_App.Models;
+using Maui_App.Repositories.Locations;
 
 namespace Maui_App.Services.Locations
 {
-    internal class LocationService
+    public class LocationService : ILocationService
     {
+        private readonly ILocationRepository _locationRepository;
+
+        public LocationService(ILocationRepository locationRepository)
+        {
+            _locationRepository = locationRepository;
+        }
+
+        public Task<List<LocationModel>> GetLocations()
+            => _locationRepository.GetLocations();
     }
 }

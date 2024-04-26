@@ -24,7 +24,7 @@ var inspections = new List<Inspection>
     new()
     {
         Id = Guid.Parse("{EE272F8B-6096-4CB6-8625-BB4BB2D89E8B}"),
-        Name = "AED Inspection 01",
+        Name = "Inspection 8401",
         Date = DateTime.Now.AddMinutes(-30),
         Status = InspectionStatus.InProgress,
         Description = "Nothing of note to report for AED Inspection 01.",
@@ -39,7 +39,7 @@ var inspections = new List<Inspection>
     new()
     {
         Id = Guid.Parse("{3448D5A4-0F72-4DD7-BF15-C14A46B26C00}"),
-        Name = "First Aid Inspection 01",
+        Name = "Inspection 9401",
         Status = InspectionStatus.InProgress,
         Date = DateTime.Now.AddMinutes(-35),
         Description = "Nothing of note to report for First Aid Inspection 01.",
@@ -54,7 +54,7 @@ var inspections = new List<Inspection>
     new()
     {
         Id = Guid.Parse("{B419A7CA-3321-4F38-BE8E-4D7B6A529319}"),
-        Name = "FE Inspection 01",
+        Name = "Inspection 7801",
         Status = InspectionStatus.Complete,
         Date = DateTime.Now.AddMinutes(-40),
         Description = "Nothing of note to report for FE Inspection 01.",
@@ -69,11 +69,11 @@ var inspections = new List<Inspection>
     new()
     {
         Id = Guid.Parse("{62787623-4C52-43FE-B0C9-B7044FB5929B}"),
-        Name = "FE Inspection 02",
+        Name = "Inspection 9802",
         Status = InspectionStatus.Complete,
         Date = DateTime.Now.AddMinutes(-45),
         Description = "Nothing of note to report for FE Inspection 02.",
-        ImageUrl = "https://s42814.pcdn.co/wp-content/uploads/2003/12/iStock_507530924-1-scaled-1.jpg.optimal.jpg",
+        ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6jJUrx3e9XDHToen3Jyc679LuqwloBHEU1w&s",
         Location = new Location
         {
             Id = Guid.Parse("B44DEF69-5F23-4AD9-9B9F-2BDB10A73D4F"),
@@ -84,11 +84,11 @@ var inspections = new List<Inspection>
     new()
     {
         Id = Guid.Parse("{1BABD057-E980-4CB3-9CD2-7FDD9E525668}"),
-        Name = "Smoke Detector Inspection 01",
+        Name = "Inspection 6401",
         Status = InspectionStatus.Complete,
         Date = DateTime.Now.AddMinutes(-50),
         Description = "Nothing of note to report for Smoke Detector Inspection 01.",
-        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/d/d9/Smoke_detector.jpg",
+        ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7k4nBDGQKqdRRVuL-ODhlIcH6mf-UsXiU8A&s",
         Location = new Location
         {
             Id = Guid.Parse("346B0B2B-05EB-4FBE-916A-9C0C8D474112"),
@@ -99,9 +99,25 @@ var inspections = new List<Inspection>
     new()
     {
         Id = Guid.Parse("{ADC42C09-08C1-4D2C-9F96-2D15BB1AF299}"),
-        Name = "AED Inspection 02",
-        Date = DateTime.Now.AddMinutes(-55),
+        Name = "Inspection 8702",
+        Status = InspectionStatus.Cancelled,
+        Date = DateTime.Now.AddDays(-1),
         Description = "Nothing of note to report for AED Inspection 02.",
+        ImageUrl = "https://www.heart.org/-/media/Images/News/2023/January-2023/0117AEDThingstoKnowHamlin_SC.jpg",
+        Location = new Location
+        {
+            Id = Guid.Parse("995B7283-5938-4E6A-8B17-01380984DCFF"),
+            LocationType = LocationType.AED,
+            Name = "AED #1"
+        }
+    },
+    new()
+    {
+        Id = Guid.Parse("{EE272F8B-6096-4CB6-8625-BB4BB2D89E8B}"),
+        Name = "Inspection 9001",
+        Date = DateTime.Now.AddDays(-1),
+        Status = InspectionStatus.InProgress,
+        Description = "Nothing of note to report for AED Inspection 01.",
         ImageUrl = "https://www.heart.org/-/media/Images/News/2023/January-2023/0117AEDThingstoKnowHamlin_SC.jpg",
         Location = new Location
         {

@@ -11,7 +11,7 @@
     /// <summary>
     /// Provides an abstraction layer for presenting dialogs to the user.
     /// </summary>
-    internal interface IDialogService
+    public interface IDialogService
     {
         /// <summary>
         /// Asks a yes/no question with customizable button texts.

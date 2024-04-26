@@ -6,7 +6,7 @@ https://github.com/WH-Creations/Maui_Sample/assets/97212578/05a4d15a-b228-419d-9
 
 ## Instructions
 1. Run the Maui_Api project
-2. Run the Maui_App targetting an Android simulator in Debug Mode]
+2. Run the Maui_App targetting an Android simulator
 
 ## Architecture
 - MVVM
@@ -21,7 +21,6 @@ https://github.com/WH-Creations/Maui_Sample/assets/97212578/05a4d15a-b228-419d-9
 - Microsoft.Extensions.Logging.Debug
 
 ## TODO
-- Fix release mode crash (likely XAML) in the Inspection Detail page, but runs fine in debug for the time being.
 - Handle keyboard presentation gracefully to avoid UI components being covered on smaller devices.
 - Add pull to refresh on main inspection list page.
 - Add ability to select picture from camera roll (time permitting)

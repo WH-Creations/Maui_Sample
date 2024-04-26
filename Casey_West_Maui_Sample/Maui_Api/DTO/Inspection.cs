@@ -1,27 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Maui_Api.DTO
+namespace Maui_Api.DTO;
+
+public class Inspection
 {
-    public class Inspection
-    {
-        public Guid Id { get; set; }
-        public string? ImageUrl { get; set; }
+    public Guid Id { get; set; }
 
-        [Required]
-        [MinLength(3)]
-        [MaxLength(50)]
-        public string Name { get; set; } = string.Empty;
+    [Url]
+    public string? ImageUrl { get; set; } // Validate URL if provided.
 
-        [Required]
-        public DateTime Date { get; set; }
+    [Required]
+    [MinLength(3, ErrorMessage = "Name must be at least 3 characters long.")]
+    [MaxLength(50, ErrorMessage = "Name cannot exceed 50 characters.")]
+    public string Name { get; set; } = string.Empty;
 
-        [MaxLength(250)]
-        public string? Description { get; set; }
+    [Required]
+    public DateTime Date { get; set; }
 
-        [Required]
-        public InspectionStatus Status { get; set; }
+    [MaxLength(250, ErrorMessage = "Description cannot exceed 250 characters.")]
+    public string? Description { get; set; }
 
-        [Required]
-        public required Location Location { get; set; }
-    }
+    [Required]
+    public InspectionStatus Status { get; set; } // Ensure that this enum is defined elsewhere in your project.
+
+    [Required]
+    public Location Location { get; set; } = new Location();
 }

@@ -152,6 +152,7 @@ namespace Maui_App.ViewModels.Inspection
                      MainThread.BeginInvokeOnMainThread(() =>
                      {
                          MapInspection(inspectionDetail);
+                         DeleteInspectionCommand.NotifyCanExecuteChanged();
                          ValidateAllProperties();
                      });
                  });

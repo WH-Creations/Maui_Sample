@@ -24,9 +24,6 @@ namespace Maui_App.ViewModels.Inspection
 
         #region Observable Properties
         [ObservableProperty]
-        private string _pageTitle = default!;
-
-        [ObservableProperty]
         private Guid _id;
 
         [ObservableProperty]
@@ -192,8 +189,6 @@ namespace Maui_App.ViewModels.Inspection
                 Description = model.Description;
                 Location = Locations.FirstOrDefault(c => c.Id == model.Location.Id && c.Name == model.Location.Name);
             }
-
-            PageTitle = Id != Guid.Empty ? "Edit Inspection" : "Add Inspection";
         }
 
         private InspectionModel MapDataToInspectionModel()

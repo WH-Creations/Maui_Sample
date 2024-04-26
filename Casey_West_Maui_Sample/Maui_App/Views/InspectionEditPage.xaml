@@ -8,7 +8,7 @@
              x:Class="Maui_App.Views.InspectionEditPage"
              Shell.BackgroundColor="{StaticResource Primary}"
              Shell.TitleColor="White"
-             Title="{Binding PageTitle}">
+             Title="Inspection Detail">
     <ContentPage.Resources>
         <converters:InspectionStatusConverter x:Key="InspectionStatusConverter" />
         <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />

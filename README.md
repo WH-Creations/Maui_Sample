@@ -22,3 +22,6 @@ https://github.com/WH-Creations/Maui_Sample/assets/97212578/05a4d15a-b228-419d-9
 - Handle keyboard presentation gracefully to avoid UI components being covered on smaller devices.
 - Add ability to select picture from camera roll (time permitting)
 - Code cleanup (It is 2am, there is probably some code cleanup to do but that will have to wait)
+
+## API
+<img width="724" alt="image" src="https://github.com/WH-Creations/Maui_Sample/assets/97212578/7c8b67bf-d9ec-4374-a0a9-d75804b75586">

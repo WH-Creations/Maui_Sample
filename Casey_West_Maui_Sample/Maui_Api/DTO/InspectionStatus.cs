@@ -6,6 +6,7 @@ namespace Maui_Api.DTO
     {
         InProgress = 0,
         Complete = 1,
-        Cancelled = 2
+        Cancelled = 2,
+        Unknown = 3
     }
 }

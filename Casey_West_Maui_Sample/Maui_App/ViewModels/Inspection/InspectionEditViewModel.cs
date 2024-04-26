@@ -28,10 +28,9 @@ namespace Maui_App.ViewModels.Inspection
 
         [ObservableProperty]
         [Required]
-        [MinLength(3)]
         [MaxLength(50)]
         [NotifyDataErrorInfo]
-        private string? _name;
+        private string _name = string.Empty;
 
         [ObservableProperty]
         private string? _imageUrl = null;
@@ -49,12 +48,12 @@ namespace Maui_App.ViewModels.Inspection
         [ObservableProperty]
         [MaxLength(250)]
         [NotifyDataErrorInfo]
-        private string? _description;
+        private string _description = string.Empty;
 
         [ObservableProperty]
         [Required]
         [NotifyDataErrorInfo]
-        private LocationViewModel? _location = new();
+        private LocationViewModel? _location;
 
         [ObservableProperty]
         private DateTime _minDate = DateTime.Now;
@@ -80,32 +79,29 @@ namespace Maui_App.ViewModels.Inspection
 
             InspectionModel model = MapDataToInspectionModel();
 
+            bool result = false;
             if (Id == Guid.Empty)
             {
-                if (await _inspectionService.CreateInspection(model))
-                {
-                    WeakReferenceMessenger.Default.Send(new InspectionUpdatedMessage());
-                    await _dialogService.Notify("Success", "The inspection is added.");
-                    await _navigationService.GoBack();
-                }
-                else
-                {
-                    await _dialogService.Notify("Failed", "Adding the inspection failed.");
-                }
+                result = await _inspectionService.CreateInspection(model);
             }
             else
             {
-                if (await _inspectionService.EditInspection(model))
+                result = await _inspectionService.EditInspection(model);
+            }
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                if (result)
                 {
                     WeakReferenceMessenger.Default.Send(new InspectionUpdatedMessage());
-                    await _dialogService.Notify("Success", "The inspection is updated.");
+                    await _dialogService.Notify("Success", "The inspection has been updated.");
                     await _navigationService.GoBack();
                 }
                 else
                 {
-                    await _dialogService.Notify("Failed", "Editing the inspection failed.");
+                    await _dialogService.Notify("Failed", "Updating the inspection failed.");
                 }
-            }
+            });
         }
 
         [RelayCommand]
@@ -141,19 +137,22 @@ namespace Maui_App.ViewModels.Inspection
         public override async Task LoadAsync()
         {
             await Loading(
-                async () =>
-                {
-                    var locations = await _locationService.GetLocations();
-                    MapLocations(locations);
+                 async () =>
+                 {
+                     var locations = await _locationService.GetLocations();
+                     MainThread.BeginInvokeOnMainThread(() => MapLocations(locations));
 
-                    if (inspectionDetail is null && Id != Guid.Empty)
-                    {
-                        inspectionDetail = await _inspectionService.GetInspection(Id);
-                    }
-                    MapInspection(inspectionDetail);
+                     if (inspectionDetail == null && Id != Guid.Empty)
+                     {
+                         inspectionDetail = await _inspectionService.GetInspection(Id);
+                     }
 
-                    ValidateAllProperties();
-                });
+                     MainThread.BeginInvokeOnMainThread(() =>
+                     {
+                         MapInspection(inspectionDetail);
+                         ValidateAllProperties();
+                     });
+                 });
         }
 
         private void AddInspectionViewModel_ErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
@@ -186,7 +185,7 @@ namespace Maui_App.ViewModels.Inspection
                 ImageUrl = model.ImageUrl;
                 InspectionStatus = (InspectionStatusEnum)model.Status;
                 Date = model.Date;
-                Description = model.Description;
+                Description = model.Description ?? string.Empty;
                 Location = Locations.FirstOrDefault(c => c.Id == model.Location.Id && c.Name == model.Location.Name);
             }
         }

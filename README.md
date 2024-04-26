@@ -1,6 +1,10 @@
 # Maui_Sample
  A sample project using .NET Maui that shows a list of safety inspections with the ability to add and edit. I also wrote a minimal API to serve as the backend as opposed to standing up a local DB or dedicated server. 
 
+
+https://github.com/WH-Creations/Maui_Sample/assets/97212578/05a4d15a-b228-419d-930c-317ea4417564
+
+
 ## Architecture
 - MVVM
 - Dependency Injection

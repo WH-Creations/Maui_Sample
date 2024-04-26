@@ -100,16 +100,6 @@
                         </Grid>
                     </Grid>
 
-                    <VerticalStackLayout Margin="0,10,0,0" BindableLayout.ItemsSource="{Binding Errors}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="dataAnnotations:ValidationResult">
-                                <Label
-                                Text="{Binding ErrorMessage}"
-                                Style="{StaticResource ErrorLabelStyle}"  />
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </VerticalStackLayout>
-
                     <VerticalStackLayout Grid.Row="1">
                         <Button
                         Margin="0,10,0,0"

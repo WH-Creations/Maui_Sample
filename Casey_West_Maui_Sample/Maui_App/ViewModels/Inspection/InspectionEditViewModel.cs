@@ -63,7 +63,8 @@ namespace Maui_App.ViewModels.Inspection
         public List<InspectionStatusEnum> StatusList { get; set; } =
             Enum.GetValues(typeof(InspectionStatusEnum)).Cast<InspectionStatusEnum>().ToList();
 
-        public ObservableCollection<ValidationResult> Errors { get; } = [];
+        [ObservableProperty]
+        public ObservableCollection<ValidationResult> _errors = [];
         public ObservableCollection<LocationViewModel> Locations { get; set; } = [];
 
         #region Relay Commands
@@ -94,17 +95,17 @@ namespace Maui_App.ViewModels.Inspection
                 if (result)
                 {
                     WeakReferenceMessenger.Default.Send(new InspectionUpdatedMessage());
-                    await _dialogService.Notify("Success", "The inspection has been updated.");
+                    await _dialogService.Notify("Success", "The inspection has been saved.");
                     await _navigationService.GoBack();
                 }
                 else
                 {
-                    await _dialogService.Notify("Failed", "Updating the inspection failed.");
+                    await _dialogService.Notify("Failed", "Saving the inspection failed.");
                 }
             });
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanDeleteInspection))]
         public async Task DeleteInspection()
         {
             if (await _dialogService.Ask("Delete Inspection", "Are you sure you want to delete this inspection?"))
@@ -119,6 +120,7 @@ namespace Maui_App.ViewModels.Inspection
         #endregion
 
         private bool CanSubmitInspection() => !HasErrors;
+        private bool CanDeleteInspection() => Id != Guid.Empty;
 
         public InspectionEditViewModel(
             IInspectionService inspectionService,

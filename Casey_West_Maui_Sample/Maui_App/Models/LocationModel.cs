@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Maui_App.Models
 {
     internal class LocationModel
     {
+        public Guid Id { get; set; }
+
+        [Required]
+        public LocationTypeEnum LocationType { get; set; }
+
+        public string Name { get; set; } = default!;
     }
 }

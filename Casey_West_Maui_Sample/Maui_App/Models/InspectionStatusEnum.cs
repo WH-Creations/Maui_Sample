@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Maui_App.Models
+﻿namespace Maui_App.Models
 {
-    internal class InspectionStatusEnum
+    internal enum InspectionStatusEnum
     {
+        InProgress = 0,
+        Complete = 1,
+        Cancelled = 2
     }
 }

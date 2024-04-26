@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Maui_App.Models
+﻿namespace Maui_App.Models
 {
-    internal class LocationTypeEnum
+    internal enum LocationTypeEnum
     {
+        AED = 0,
+        FireExtinguisher = 1,
+        FirstAidKit = 2,
+        SmokeDetector = 3
     }
 }

@@ -15,6 +15,9 @@ namespace Maui_App.ViewModels.Inspection
         private string _name = default!;
 
         [ObservableProperty]
+        private string _description = default!;
+
+        [ObservableProperty]
         private double _price;
 
         [ObservableProperty]
@@ -33,6 +36,7 @@ namespace Maui_App.ViewModels.Inspection
             Guid id,
             string name,
             DateTime date,
+            string? description,
             InspectionStatusEnum status,
             string? imageUrl = null,
             LocationViewModel? location = null)
@@ -41,6 +45,7 @@ namespace Maui_App.ViewModels.Inspection
             ImageUrl = imageUrl;
             Name = name;
             Date = date;
+            Description = description ?? string.Empty;
             InspectionStatus = status;
             Location = location;
 

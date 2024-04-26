@@ -37,7 +37,6 @@ namespace Maui_App
         private static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<InspectionListPage>();
-            builder.Services.AddTransient<InspectionDetailPage>();
             builder.Services.AddTransient<InspectionEditPage>();
 
             return builder;
@@ -46,7 +45,6 @@ namespace Maui_App
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
             builder.Services.AddSingleton<InspectionListViewModel>();
-            builder.Services.AddTransient<InspectionDetailViewModel>();
             builder.Services.AddTransient<InspectionEditViewModel>();
 
             return builder;

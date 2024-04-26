@@ -5,6 +5,8 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:views="clr-namespace:Maui_App.Views"
              xmlns:converters="clr-namespace:Maui_App.Converters"
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White"
              Title="Safety Inspections">
 
     <ContentPage.Resources>
@@ -32,10 +34,10 @@
             <Grid>
                 <StackLayout>
                     <Button 
-                        Margin="5"
+                        Margin="15"
                         Command="{Binding NavigateToAddInspectionCommand}"
                         HorizontalOptions="Fill"
-                        Text="Add event" />
+                        Text="New Inspection" />
                     <CollectionView 
                         ItemsSource="{Binding Inspections}"
                         SelectedItem="{Binding SelectedInspection, Mode=TwoWay}"
@@ -44,6 +46,8 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Padding="10" ColumnDefinitions="Auto,Auto">
+
+                                    <!--\ADD TAP AREA TO FRAME OR SOMETHING SIMILAR TO AVOID DEAD SPACE OVER IMAGE WHEN TRYING TO TAP ON CELL-->
                                     <Frame WidthRequest="120" HeightRequest="80" CornerRadius="6" Padding="0" HasShadow="False">
                                         <Image 
                                             Aspect="AspectFill"
@@ -58,7 +62,6 @@
                                         HorizontalOptions="Center"
                                         VerticalOptions="Center">
                                         <Label 
-                                            Style="{StaticResource ValueLabelStyle}"
                                             Margin="0"
                                             Text="{Binding Name}"
                                             FontAttributes="Bold"/>

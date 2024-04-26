@@ -8,8 +8,6 @@ namespace Maui_App
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("//inspection", typeof(InspectionListPage));
-            Routing.RegisterRoute("inspection/detail", typeof(InspectionDetailPage));
             Routing.RegisterRoute("inspection/add", typeof(InspectionEditPage));
             Routing.RegisterRoute("inspection/edit", typeof(InspectionEditPage));
         }

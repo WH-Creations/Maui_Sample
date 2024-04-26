@@ -25,11 +25,11 @@ namespace Maui_App.ViewModels.Inspection
         [RelayCommand]
         private async Task NavigateToSelectedDetail()
         {
-            if (SelectedInspection is not null)
-            {
-                await _navigationService.GoToInspectionDetail(SelectedInspection.Id);
-                SelectedInspection = null;
-            }
+            if (SelectedInspection == null) {  return; }
+            var detailModel = MapToInspectionModel(SelectedInspection);
+            await _navigationService.GoToEditInspection(detailModel);
+
+            SelectedInspection = null;
         }
 
         [RelayCommand]
@@ -68,6 +68,26 @@ namespace Maui_App.ViewModels.Inspection
             Inspections = listItems.ToObservableCollection();
         }
 
+        #region Mappings
+        private InspectionModel MapToInspectionModel(InspectionListItemViewModel inspectionListItemViewModel)
+        {
+            return new InspectionModel
+            {
+                Id = inspectionListItemViewModel.Id,
+                Name = inspectionListItemViewModel.Name ?? string.Empty,
+                ImageUrl = inspectionListItemViewModel.ImageUrl,
+                Status = (InspectionStatusEnum)inspectionListItemViewModel.InspectionStatus,
+                Date = inspectionListItemViewModel.Date,
+                Description = inspectionListItemViewModel.Description ?? string.Empty,
+                Location = new LocationModel
+                {
+                    Id = inspectionListItemViewModel.Location!.Id,
+                    LocationType = inspectionListItemViewModel.Location.LocationType,
+                    Name = inspectionListItemViewModel.Location.Name
+                }
+            };
+        }
+
         private InspectionListItemViewModel MapInspectionModelToInspectionListItemViewModel(InspectionModel @inspection)
         {
             var location = new LocationViewModel
@@ -81,11 +101,15 @@ namespace Maui_App.ViewModels.Inspection
                 @inspection.Id,
                 @inspection.Name,
                 @inspection.Date,
+                inspection.Description,
                 (InspectionStatusEnum)@inspection.Status,
                 @inspection.ImageUrl,
                 location);
         }
 
+        #endregion
+
+        #region Messages
         public async void Receive(InspectionUpdatedMessage message)
         {
             Inspections.Clear();
@@ -100,6 +124,7 @@ namespace Maui_App.ViewModels.Inspection
                 Inspections.Remove(deletedInspection);
             }
         }
+        #endregion
     }
 }
 

@@ -1,9 +1,12 @@
+using Maui_App.ViewModels.Inspection;
+
 namespace Maui_App.Views;
 
-public partial class InspectionEditPage : ContentPage
+public partial class InspectionEditPage : BaseContentPage
 {
-	public InspectionEditPage()
-	{
-		InitializeComponent();
-	}
+    public InspectionEditPage(InspectionEditViewModel vm)
+    {
+        InitializeComponent();
+        BindingContext = vm;
+    }
 }

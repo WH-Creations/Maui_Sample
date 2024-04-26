@@ -1,12 +1,132 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<views:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Maui_App.Views"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:Maui_App.Converters"
+             xmlns:dataAnnotations="clr-namespace:System.ComponentModel.DataAnnotations;assembly=System.ComponentModel.Annotations"
              x:Class="Maui_App.Views.InspectionEditPage"
-             Title="InspectionEditPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentPage>
+             Shell.BackgroundColor="{StaticResource Primary}"
+             Shell.TitleColor="White"
+             Title="{Binding PageTitle}">
+    <ContentPage.Resources>
+        <converters:InspectionStatusConverter x:Key="InspectionStatusConverter" />
+        <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView>
+            <Grid>
+                <VerticalStackLayout Padding="10">
+
+
+                    <Grid RowDefinitions="Auto,*">
+                        <Grid ColumnDefinitions=".3*,.7*"
+                              ColumnSpacing="5"
+                              RowDefinitions="*,*,*,*,*,*,*"
+                              RowSpacing="10">
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Text="Name"
+                                   FontAttributes="Bold"/>
+                            <Entry Grid.Row="0" 
+                                   Grid.Column="1" 
+                                   Text="{Binding Name, Mode=TwoWay}" 
+                                   VerticalOptions="End" />
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Text="Image"
+                                   FontAttributes="Bold"/>
+                            <Grid Grid.Row="1"
+                                  Grid.Column="1"
+                                  RowDefinitions="Auto">
+
+                                <Frame Grid.Row="1" HorizontalOptions="Start" WidthRequest="120" HeightRequest="80" CornerRadius="6" Padding="0" HasShadow="False">
+                                    <Image 
+                                    Aspect="AspectFill"
+                                    Source="{Binding ImageUrl, TargetNullValue=fallback.jpg}"
+                                    VerticalOptions="Center"
+                                    WidthRequest="120"
+                                    HeightRequest="80"/>
+                                </Frame>
+                            </Grid>
+                            
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Text="Status"
+                                   FontAttributes="Bold"/>
+                            <Picker Grid.Row="2"
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding StatusList}"
+                                    SelectedItem="{Binding InspectionStatus}" />
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Text="Date"
+                                   FontAttributes="Bold"/>
+                            <DatePicker Grid.Row="3"
+                                        Grid.Column="1"
+                                        Date="{Binding Date}"
+                                        MinimumDate="{Binding MinDate}" />
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Text="Description"
+                                   FontAttributes="Bold"/>
+                            <Editor Grid.Row="4"
+                                    Grid.Column="1"
+                                    MinimumHeightRequest="100"
+                                    Text="{Binding Description, Mode=TwoWay}"
+                                    VerticalOptions="Start" />
+
+                            <Label Grid.Row="5"
+                                   Grid.Column="0"
+                                   Margin="10"
+                                   Text="Location"
+                                   FontAttributes="Bold"/>
+                            <Picker Grid.Row="5"
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding Locations, Mode=OneWay}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding Location, Mode=TwoWay}" />
+                        </Grid>
+                    </Grid>
+
+                    <VerticalStackLayout Margin="0,10,0,0" BindableLayout.ItemsSource="{Binding Errors}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="dataAnnotations:ValidationResult">
+                                <Label
+                                    Text="{Binding ErrorMessage}"
+                                    Style="{StaticResource ErrorLabelStyle}"  />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="1">
+                        <Button
+                            Margin="0,10,0,0"
+                            Command="{Binding SubmitCommand}"
+                            Text="Submit" />
+                        <Button
+                            Margin="0,10,0,0"
+                            Command="{Binding DeleteInspectionCommand}"
+                            BackgroundColor="MediumVioletRed"
+                            Text="Delete Inspection" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+            </Grid>
+        </ScrollView>
+        <Grid  BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" 
+            IsVisible="{Binding IsLoading}">
+            <ActivityIndicator IsRunning="{Binding IsLoading}" />
+        </Grid>
+    </Grid>
+</views:BaseContentPage>

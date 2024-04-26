@@ -1,7 +1,6 @@
-﻿using Maui_App.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Maui_App.NewFolder1
+namespace Maui_App.Models
 {
     internal class InspectionModel
     {

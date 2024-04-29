@@ -23,6 +23,25 @@ namespace Maui_App.ViewModels.Inspection
         public InspectionModel? inspectionDetail;
 
         #region Observable Properties
+
+        // [ObservableProperty] auto-generates a property with INotifyPropertyChanged implemented.
+        // It generates the following at compile-time using a source generator:
+        //
+        //private Guid _id;
+        //public Guid Id
+        //{
+        //    get => _id;
+        //    set
+        //    {
+        //        if (_id != value)
+        //        {
+        //            _id = value;
+        //            OnPropertyChanged(nameof(Id));
+        //        }
+        //    }
+        //}
+        //
+        // This means any changes to 'Id' will automatically notify the UI to update itself.
         [ObservableProperty]
         private Guid _id;
 
@@ -68,7 +87,15 @@ namespace Maui_App.ViewModels.Inspection
         public ObservableCollection<LocationViewModel> Locations { get; set; } = [];
 
         #region Relay Commands
-
+        /// <summary>
+        /// `[RelayCommand]` creates a command that executes the `Submit` method. This command is bound to UI elements like buttons,
+        /// enabling or disabling them based on the `CanSubmitInspection` method's result. The command automates many aspects of command
+        /// implementation, including thread safety and the execution guard based on conditions.
+        ///
+        /// The `Submit` method validates the ViewModel's properties, checks for errors, and either creates or edits an inspection
+        /// based on the inspection's ID. This method ensures that all UI updates and messages are dispatched
+        /// to the main thread, maintaining thread safety and ensuring the UI is updated correctly.
+        /// </summary>
         [RelayCommand(CanExecute = nameof(CanSubmitInspection))]
         private async Task Submit()
         {
@@ -146,6 +173,7 @@ namespace Maui_App.ViewModels.Inspection
 
                      if (inspectionDetail == null && Id != Guid.Empty)
                      {
+                         // WE DON'T GET HERE BECAUSE WE PASS THE INSPECTION IN THE NAVIGATION
                          inspectionDetail = await _inspectionService.GetInspection(Id);
                      }
 
@@ -155,15 +183,23 @@ namespace Maui_App.ViewModels.Inspection
                          DeleteInspectionCommand.NotifyCanExecuteChanged();
                          ValidateAllProperties();
                      });
+
                  });
         }
 
         private void AddInspectionViewModel_ErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
         {
+            // Clear the existing errors to avoid duplicates
             Errors.Clear();
+
+            // Retrieve all current errors from the ObservableValidator's error collection
+            // and add them to the ViewModel's localized error collection.
             GetErrors().ToList().ForEach(Errors.Add);
+
+            // Notify the SubmitCommand that the error state has changed
             SubmitCommand.NotifyCanExecuteChanged();
         }
+
 
         #region Mappings
         private void MapLocations(List<LocationModel> locations)

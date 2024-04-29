@@ -49,6 +49,12 @@ namespace Maui_App.ViewModels.Inspection
             InspectionStatus = status;
             Location = location;
 
+            /// <summary>
+            /// Registers this ViewModel to listen only for InspectionStatusChangedMessage. 
+            /// Although the registration method looks generic, it's actually specific due to this ViewModel implementing 
+            /// IRecipient<InspectionStatusChangedMessage>. The messenger uses this information to deliver only 
+            /// InspectionStatusChangedMessage instances to this ViewModel, filtering out all other message types.
+            /// </summary>
             WeakReferenceMessenger.Default.Register(this);
         }
 
